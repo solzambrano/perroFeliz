@@ -1,0 +1,138 @@
+/*pagina completa*/
+body{
+  margin:0%;
+  width: 100%;
+  height: auto;
+  font-weight: bold;
+}
+.fondo{
+    background-image: url(/Imagenes/fondoGimp.jpg);
+  background-color: rgba(231, 252, 141, 0.4);
+  width:100%;
+  margin:0%;
+}
+/*marco de la pagina*/
+.recuadro{
+  width:80%;
+  height:100%;
+  margin:auto;
+}
+/*header  de pagina*/
+header{
+   width:100%;
+   display:flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+h1{
+    font-size: 4em;
+    color:rgb(215, 247, 141);
+    font-family: 'Piedra', cursive;
+    /*propiedad para darle borde negro a laas letras*/
+    -webkit-text-stroke: 2px black;
+    font-weight: bold;
+}
+/*carrusel*/
+
+.contenedor{
+    width:100%;
+    border: 3px solid rgb(23, 20, 48);
+    display:block;
+    margin:3% 0% 4% 0%;
+}
+.perro{
+    width:100%;
+    height: 30em;
+}
+
+/*seccion que se despliegan los botones*/
+
+.flex{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+ .boton{ 
+   color:rgb(80, 80, 95);
+   background-color: transparent;
+  border-radius: 0.3;
+  /*cambiar la forma del cursor*/
+  cursor:pointer;
+}
+.boton:hover{
+    background-image: -webkit-linear-gradient(top, #a2df9333, #2bd6ab);
+    background-image: -moz-linear-gradient(top, #a2df9333, #2bd6ab);
+    background-image: -ms-linear-gradient(top, #a2df9333, #2bd6ab);
+    background-image: -o-linear-gradient(top, #a2df9333, #2bd6ab);
+    background-image: linear-gradient(to bottom, #a2df9333, #2bd6ab);
+}
+
+/*imagenes de los comentarios*/
+.card-img{
+    width:15%;
+    height: 20%;
+}
+/*cartas del comentario*/
+#prueba #prueba2 #prueba3{
+    position:relative;
+}
+/*posicionamiento de las card, con top de 24 en la suma de cada top*/
+#prueba .posicionamiento{
+    position:absolute;
+    left: 30%;
+    top: 111%;
+}
+#prueba2 .posicionamiento {
+    position:absolute;
+    left: 30%;
+    top: 135%;
+}
+#prueba3 .posicionamiento {
+    position:absolute;
+    left: 30%;
+    top: 159%;
+}
+.tamaño{
+    font-size: 1em;
+}
+
+
+
+
+/*iconos*/
+
+
+
+
+
+/*pie de pagina*/
+/*formulario*/
+legend{
+    margin:auto;
+    position: relative;
+    left:45%;
+}
+form{
+    border:3px dotted brown;
+}
+.separado{
+margin:20px auto 20px 15px;
+
+}
+.separados{
+    width: 70%;
+    display: flex;
+justify-content: space-between;
+position:relative;
+left:10%;
+
+}
+#txarea{
+width: 30%;;
+height: 50%;
+border: 1px solid 
+}
+.iconos{
+    padding:5px 3px 3px 5px; 
+    cursor:pointer;
+}

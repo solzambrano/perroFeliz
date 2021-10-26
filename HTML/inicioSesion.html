@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/main.css">
+    <title>Inicio Sesion</title>
+</head>
+<body>
+    <div class="fondo">
+        <div class="recuadro">
+        <header>
+          <h1>Veterinaria Perro Feliz</h1>
+    <!--Quizas sea un div con la informacion de login o una section aparte-->
+          <a href="registro.html"><img src="../Imagenes/sesionjpg.jpg" alt="inicio sesion"></a> 
+        </header>
+        <section>
+            <form action="resultado.html" method="get" target="blank">
+                <fieldset>
+                    <legend>Informacion Personal</legend>
+                    <div class="separado">
+                        <label>Nombre
+                            <input type="text" name="nombre">
+                        </label>
+                        <label>Apellido 
+                            <input type="text" name="apellido">
+                        </label>
+                    </div>                     
+                    <div class="separados">
+                      <label>
+                        <input class="btn btn-success" type="submit" value="Enviar Informacion">
+                      </label>
+                      <label>
+                        <input class="btn btn-success " type="reset" value="Reiniciar" >
+                      </label> 
+                    </div>
+                    <p>¿Ya tienes cuenta?<a href="inicioSesion.html">Inicia Sesion</a></p>
+                </fieldset>
+            </form>
+</section>
+        </div>
+        </div>
+</body>
+</html>
