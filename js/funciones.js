@@ -18,4 +18,6 @@ $("#boton2").click(function(){
         $("#comentarios .cartas").show()
         $("#quien .cartas").hide()
         $("#preguntas .cartas").hide()
-        })
+    })
+
+/** segun en la seccion que estoy el boton debe pintrse para saber a que cartel corresponde */
