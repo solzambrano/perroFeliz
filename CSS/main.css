@@ -93,7 +93,10 @@ background-color: white;
 .tamaño{
     font-size: 1em;
 }
-
+/*formulario*/
+form{
+    background-color: white;
+}
 
 
 
