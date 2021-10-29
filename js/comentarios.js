@@ -1,9 +1,10 @@
 
 /**esta seccion todavia no esta realizada **/
 class Comentario{
-    constructor(nombre, apellido, mensaje){
+    constructor(nombre, apellido,imagen, mensaje){
         this.nombre=nombre;
         this.apellido=apellido;
+        this.imagen=imagen;
         this.mensaje= mensaje;
         this.fechaPublicacion=newDate()
     }
