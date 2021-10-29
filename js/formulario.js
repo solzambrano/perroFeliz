@@ -8,6 +8,7 @@ $("#botonSig").click(function(){
     $("#pasoDos").show()
     $("#atras").show()
 })
+
 let usuarios=[];
     /**declaracion de variables y clases */
 class Usuario{
@@ -36,10 +37,6 @@ const expresiones={
             pattern:/^.{4,8}$/,
             mensaje:"el campo debe tener entre 4 y 8 caracteres"
         },
-        user:{
-            pattern:/^[a-zA-Z0-9\_\-]{4,15}$/,
-            mensaje:"la longitud debe ser entre 4 y 15 caracteres"
-        },
         correo:{
             pattern:/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
             mensaje:"lo que ha ingresado no tiene formato de correo"
@@ -58,12 +55,9 @@ const expresiones={
     let numero=document.getElementById("numero")
     let barrio=document.getElementById("barrio")
     let email =document.getElementById("email");
-    let user =document.getElementById("user");
     let password =document.getElementById("password");
     let botonSig=document.getElementById("botonSig");
     let enviar =document.getElementById("enviar")
-    /**probar con otra manera llamando al input me ahorro lineas pero tendria que poner las secciones debajo de cada input*/
-    //let input=document.querySelectorAll("input").addEventListener("blur",validate)
 
 /**value */
 nombre.addEventListener("blur",()=>validatePerson(0,nombre,expresiones.string))
@@ -73,10 +67,10 @@ calle.addEventListener("blur",()=>validatePerson(3,calle,expresiones.string))
 numero.addEventListener("blur",()=>validatePerson(4,numero,expresiones.number))
 barrio.addEventListener("blur",()=>validatePerson(5,barrio,expresiones.string))
 email.addEventListener("blur",()=>validatePerson(6,email,expresiones.correo))
-user.addEventListener("blur",()=>validatePerson(7,user,expresiones.user))
+// user.addEventListener("blur",()=>validatePerson(7,user,expresiones.user))
 password.addEventListener("blur",()=>validatePerson(7,password,expresiones.pass))
 let result=botonSig.addEventListener("click",()=>validateFirstStep(validateErrores()))
-enviar.addEventListener("submit",()=>validateData(validateFirstStep(validateErrores()),result))
+enviar.addEventListener("submit",()=>validateData(e,result))
 
 /**funciones */
 validateErrores=(errores,expresion)=>{
@@ -86,9 +80,9 @@ validateErrores=(errores,expresion)=>{
           input[error].style.borderColor="red"
           let etiqueta=document.createElement("div")
           etiqueta.innerhtml=`
-                <div class="alert alert-danger" role="alert">
-                ${expresion.mensaje}
-                </div>`     
+          <div class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+            Popover on right
+            </div>`      
           input[error].appendChild(etiqueta)
         })
     }
@@ -100,6 +94,8 @@ validatePerson = (i,campo,expresion)=>{
     let errores=[]
         if(campo.value.length=0 || !expresion.pattern.test(campo.value)){
             errores.push(i)
+        }else{
+          campo.style.borderColor="blue"
         }
     validateErrores(errores,expresion) 
 }
@@ -113,15 +109,17 @@ validateFirstStep=(error)=>{
             numero:numero.value,
             barrio:barrio.value 
         }
+        console.log(person)
         return person
     }
 }
-validateData=(e,error,person)=>{
-    console.log(e)
+validateData=(e,data)=>{
+    console.log("hola",e)
     e.preventDefault()
-    if(!error){
-        console.log(usuarios)
+    if(data){
+        localStorage.setItem("user",JSON.stringify({"user":email.value,pass:pass.value}))
+        console.log(localStorage)
         usuarios.push(new Usuario(person,user.value,email.value,pass.value))
     }
 }
-console.log(usuarios)
+

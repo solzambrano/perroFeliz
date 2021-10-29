@@ -18,6 +18,10 @@ header{
    flex-direction: row;
    justify-content: space-between;
 }
+header>button{
+    border:none;
+    background :none;
+}
 h1{
     font-size: 4em;
     color:rgb(206, 140, 13);
