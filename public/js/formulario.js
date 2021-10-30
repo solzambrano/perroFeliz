@@ -8,6 +8,11 @@ $("#botonSig").click(function(){
     $("#pasoDos").show()
     $("#atras").show()
 })
+$("#atras").click(function(){
+    $("#pasoUno").show()
+    $("#pasoDos").hide()
+
+})
 
 let usuarios=[];
 let storage=[];
