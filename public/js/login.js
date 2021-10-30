@@ -23,16 +23,17 @@ $('#myModal').on('shown.bs.modal', function () {
      $('#myInput').trigger('focus')
       })
 /** segun en la seccion que estoy el boton debe pintrse para saber a que cartel corresponde */
-let form =document.getElementById("userCuenta").addEventListener("submit",()=>validate)
-
+let form =document.getElementById("userCuenta").addEventListener("click",()=>validate())
+let user=document.getElementById("email")
+let storage= JSON.parse(localStorage.user)
+console.log(storage)
 validate=(e)=>{
-    e.preventDefault();
-    let storage=JSON.parse.localStorage.getItem("user")
-    
-    let input =document.getElementsByTagNameNS("input")
-    input.foEach(elemento =>{
-console.log(input)
-
+    console.log("hola")
+    user.addEventListener("keyup",function(){
+        let existe=storage.find(element=>element==user.value)
+        console.log(existe)
+        if(existe){
+            user.value.innerHtml=existe
+        }
     })
 }
-console.log(usuarios)

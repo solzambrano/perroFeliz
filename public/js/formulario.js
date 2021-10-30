@@ -15,7 +15,7 @@ $("#atras").click(function(){
 })
 
 let usuarios=[];
-let storage=[];
+let storageUser=[];
     /**declaracion de variables y clases */
 class Usuario{
     constructor(nombre,apellido,telefono,calle,numero,barrio, email,pass){
@@ -131,9 +131,13 @@ enviar.addEventListener("submit",(e)=>{
     let result =validateFirstStep(validateErrores())
     console.log(result)
     if(result){
-        storage.push({ user:email.value,
+        let storage=localStorage.user
+        if(storage !==null){
+            storageUser=[storage]
+        }
+        storageUser.push({ user:email.value,
             pass:password.value})
-        localStorage.setItem("user",JSON.stringify({storage}))
+        localStorage.setItem("user",JSON.stringify({storageUser}))
         console.log(localStorage.getItem("user"))
         usuarios.push(new Usuario(person,email.value,password.value))
         mostrarMensaje()
