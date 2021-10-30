@@ -10,17 +10,17 @@ $("#botonSig").click(function(){
 })
 
 let usuarios=[];
+let storage=[];
     /**declaracion de variables y clases */
 class Usuario{
-    constructor(nombre,apellido,edad,calle,numero,barrio, user, email,pass){
+    constructor(nombre,apellido,telefono,calle,numero,barrio, email,pass){
         this.nombre=nombre;
         this.apellido=apellido;
-        this.edad=edad;
+        this.telefono=telefono;
         this.calle=calle;
         this.numero=numero;
         this.barrio=barrio;
         this.usuario={
-            user:user,
             email:email,
             pass:pass
         }
@@ -68,38 +68,40 @@ numero.addEventListener("blur",()=>validatePerson(4,numero,expresiones.number))
 barrio.addEventListener("blur",()=>validatePerson(5,barrio,expresiones.string))
 email.addEventListener("blur",()=>validatePerson(6,email,expresiones.correo))
 password.addEventListener("blur",()=>validatePerson(7,password,expresiones.pass))
-let result=botonSig.addEventListener("click",()=>validateFirstStep(validateErrores()))
-enviar.addEventListener("submit",()=>validateData(e,result))
+botonSig.addEventListener("click",()=>validateFirstStep(validateErrores()))
+
 
 /**funciones */
+/**pinta los campos con rojo si hay error en alguno de ellos */
 validateErrores=(errores,expresion)=>{
     let input=document.getElementsByTagName("input");
     if(errores && errores.length !==0){
         errores.forEach(error=>{
-          input[error].style.borderColor="red"
-          let etiqueta=document.createElement("div")
-          etiqueta.innerhtml=`
-          <div class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-            Popover on right
+            input[error].style.borderColor="red"
+            let etiqueta=document.createElement("div")
+            etiqueta.innerhtml=`
+            <div class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+            ${expresion.mensaje}
             </div>`      
-          input[error].appendChild(etiqueta)
+            input[error].appendChild(etiqueta)
         })
     }
     else{
-        return false
+        return "no_error"
     }
 }
+/**valida cada campo indivudal si hay un error va a la funcion validateErrores */
 validatePerson = (i,campo,expresion)=>{
     let errores=[]
-        if(campo.value.length=0 || !expresion.pattern.test(campo.value)){
-            errores.push(i)
-        }else{
-          campo.style.borderColor="blue"
-        }
+    if(campo.value.length=0 || !expresion.pattern.test(campo.value)){
+        errores.push(i)
+    }else{
+        campo.style.borderColor="blue"
+    }
     validateErrores(errores,expresion) 
 }
 validateFirstStep=(error)=>{
-    if(!error){
+    if(error=="no_error"){
         person={
             nombre: nombre.value,
             apellido:apellido.value,
@@ -108,17 +110,28 @@ validateFirstStep=(error)=>{
             numero:numero.value,
             barrio:barrio.value 
         }
-        console.log(person)
         return person
     }
+    else return false
 }
-validateData=(e,data)=>{
-    console.log("hola",e)
+mostrarMensaje=()=>{
+    let exito="";
+    exito+=`<div class="alert alert-success" role="alert">
+    Se ha creado la cuenta con exito
+  </div>`
+    enviar.innerHTML=exito
+}
+enviar.addEventListener("submit",(e)=>{
     e.preventDefault()
-    if(data){
-        localStorage.setItem("user",JSON.stringify({"user":email.value,pass:pass.value}))
-        console.log(localStorage)
-        usuarios.push(new Usuario(person,user.value,email.value,pass.value))
+    let result =validateFirstStep(validateErrores())
+    console.log(result)
+    if(result){
+        storage.push({ user:email.value,
+            pass:password.value})
+        localStorage.setItem("user",JSON.stringify({storage}))
+        console.log(localStorage.getItem("user"))
+        usuarios.push(new Usuario(person,email.value,password.value))
+        mostrarMensaje()
     }
-}
+})
 

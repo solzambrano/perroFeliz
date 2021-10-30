@@ -2,7 +2,7 @@
 body{
   margin:0%;
   width: 100%;
-  background-image: url(/Imagenes/fondoGimp.jpg);
+  background-image: url(../Imagenes/fondoGimp.jpg);
   font-weight: bold;
 }
 /*marco de la pagina*/
@@ -21,6 +21,9 @@ header{
 header>button{
     border:none;
     background :none;
+}
+header>a{
+    color :black
 }
 h1{
     font-size: 4em;
@@ -107,10 +110,8 @@ form{
 /*iconos*/
 
 
-
-
-
 /*pie de pagina*/
+
 /*formulario*/
 legend{
     margin:auto;
@@ -142,3 +143,17 @@ border: 1px solid
     cursor:pointer;
     opacity:0.6;
 }
+/**mediaquery*/
+
+@media (max-width: 600px) {
+    .contenedor {
+      display: none;
+    }
+    h1{
+        font-size: 2em;
+    }
+    #huella{
+        display:block;
+    }
+  }
+  

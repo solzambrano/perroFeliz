@@ -5,17 +5,17 @@ $(function(){
     $("#comentarios .cartas").hide()
 })
 $("#boton1").click(function(){
-    $("#quien .cartas").show()
+    $("#quien .cartas").fadeIn()
     $("#preguntas .cartas").hide()
     $("#comentarios .cartas").hide()
 })
 $("#boton2").click(function(){
-    $("#preguntas .cartas").show()
+    $("#preguntas .cartas").fadeIn()
     $("#quien .cartas").hide()
     $("#comentarios .cartas").hide()
     })
  $("#boton3").click(function(){
-        $("#comentarios .cartas").show()
+        $("#comentarios .cartas").fadeIn()
         $("#quien .cartas").hide()
         $("#preguntas .cartas").hide()
     })
@@ -27,6 +27,8 @@ let form =document.getElementById("userCuenta").addEventListener("submit",()=>va
 
 validate=(e)=>{
     e.preventDefault();
+    let storage=JSON.parse.localStorage.getItem("user")
+    
     let input =document.getElementsByTagNameNS("input")
     input.foEach(elemento =>{
 console.log(input)
