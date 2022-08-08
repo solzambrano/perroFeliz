@@ -11,7 +11,6 @@ $("#botonSig").click(function(){
 $("#atras").click(function(){
     $("#pasoUno").show()
     $("#pasoDos").hide()
-
 })
 
 let usuarios=[];
@@ -51,62 +50,84 @@ const expresiones={
             mensaje:"el numero de telefono deberia contener 10 numeros"
         }
     }
+let posicionError=[];
 
 
-    let nombre=document.getElementById("nombre");
-    let apellido=document.getElementById("apellido");
-    let telefono=document.getElementById("mob");
-    let calle=document.getElementById("calle");
-    let numero=document.getElementById("numero")
-    let barrio=document.getElementById("barrio")
-    let email =document.getElementById("email");
-    let password =document.getElementById("password");
-    let botonSig=document.getElementById("botonSig");
-    let enviar =document.getElementById("enviar")
+let nombre=document.getElementById("nombre");
+let apellido=document.getElementById("apellido");
+let telefono=document.getElementById("mob");
+let calle=document.getElementById("calle");
+let numero=document.getElementById("numero")
+let barrio=document.getElementById("barrio")
+let email =document.getElementById("email");
+let password =document.getElementById("password");
+let botonSig=document.getElementById("botonSig");
+let enviar =document.getElementById("enviar");
 
 /**value */
-nombre.addEventListener("blur",()=>validatePerson(0,nombre,expresiones.string))
-apellido.addEventListener("blur",()=>validatePerson(1,apellido,expresiones.string))
-telefono.addEventListener("blur",()=>validatePerson(2,telefono,expresiones.number))
-calle.addEventListener("blur",()=>validatePerson(3,calle,expresiones.string))
-numero.addEventListener("blur",()=>validatePerson(4,numero,expresiones.number))
-barrio.addEventListener("blur",()=>validatePerson(5,barrio,expresiones.string))
-email.addEventListener("blur",()=>validatePerson(6,email,expresiones.correo))
-password.addEventListener("blur",()=>validatePerson(7,password,expresiones.pass))
-botonSig.addEventListener("click",()=>validateFirstStep(validateErrores()))
+nombre.addEventListener("blur",()=>validatePerson(0,nombre,expresiones.string));
+apellido.addEventListener("blur",()=>validatePerson(1,apellido,expresiones.string));
+telefono.addEventListener("blur",()=>validatePerson(2,telefono,expresiones.number));
+calle.addEventListener("blur",()=>validatePerson(3,calle,expresiones.string));
+numero.addEventListener("blur",()=>validatePerson(4,numero,expresiones.number));
+barrio.addEventListener("blur",()=>validatePerson(5,barrio,expresiones.string));
+email.addEventListener("blur",()=>validatePerson(6,email,expresiones.correo));
+password.addEventListener("blur",()=>validatePerson(7,password,expresiones.pass));
+botonSig.addEventListener("click",()=>validateFirstStep());
 
 
 /**funciones */
 /**pinta los campos con rojo si hay error en alguno de ellos */
-validateErrores=(errores,expresion)=>{
+validateErrores=(errores,expresion,i)=>{
+    let div=document.getElementsByClassName("form-group");
     let input=document.getElementsByTagName("input");
-    if(errores && errores.length !==0){
-        errores.forEach(error=>{
-            input[error].style.borderColor="red"
-            let etiqueta=document.createElement("div")
-            etiqueta.innerhtml=`
-            <div class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-            ${expresion.mensaje}
-            </div>`      
-            input[error].appendChild(etiqueta)
-        })
-    }
-    else{
-        return "no_error"
-    }
+    let etiqueta=document.createElement("p");
+    let content=document.createTextNode(expresion.mensaje);
+    etiqueta.setAttribute("id","etiqueta");
+    let idEtiqueta=document.getElementById("etiqueta")
+        if(errores && errores.length !==0){
+            if(!errores.indexOf(i)){
+            errores.forEach(error=>{
+            var nameClass=div[error].className;
+            input[error].style.borderColor="red";
+            crearMensaje(error,etiqueta,content,nameClass);
+            document.getElementById("botonSig").style.visibility = "hidden";
+         })
+            }
+        }else{
+            document.getElementById("botonSig").style.visibility = "visible"
+            borrarMensaje(div,i,idEtiqueta,div[i].className);
+        }
 }
+/**esta funcion crea el mensaje de error */
+crearMensaje=(error,etiqueta,content,nameClass)=>{
+             etiqueta.appendChild(content);
+             setTimeout(function(){
+            (document.getElementsByClassName(nameClass)[error].appendChild(etiqueta)).fadeIn(1000);
+             },500)
+}
+/**si no hay error esta funcion borra la etiqueta */
+borrarMensaje=(div,error,idEtiqueta,nameClass)=>{
+    console.log(div[error])
+              setTimeout(function(){
+             (document.getElementsByClassName(nameClass)[error].removeChild(idEtiqueta)).fadeOut(1000);
+              },500);
+}
+
 /**valida cada campo indivudal si hay un error va a la funcion validateErrores */
 validatePerson = (i,campo,expresion)=>{
     let errores=[]
     if(campo.value.length=0 || !expresion.pattern.test(campo.value)){
-        errores.push(i)
+        posicionError.push(i)
+
     }else{
         campo.style.borderColor="blue"
+         posicionError=posicionError.filter(function(item){return item!==i})
     }
-    validateErrores(errores,expresion) 
+    validateErrores(posicionError,expresion,i) 
 }
-validateFirstStep=(error)=>{
-    if(error=="no_error"){
+
+validateFirstStep=()=>{
         person={
             nombre: nombre.value,
             apellido:apellido.value,
@@ -116,8 +137,6 @@ validateFirstStep=(error)=>{
             barrio:barrio.value 
         }
         return person
-    }
-    else return false
 }
 mostrarMensaje=()=>{
     let exito="";
@@ -128,7 +147,7 @@ mostrarMensaje=()=>{
 }
 enviar.addEventListener("submit",(e)=>{
     e.preventDefault()
-    let result =validateFirstStep(validateErrores())
+    let result =validateFirstStep()
     console.log(result)
     if(result){
         let storage=localStorage.user
@@ -142,5 +161,7 @@ enviar.addEventListener("submit",(e)=>{
         usuarios.push(new Usuario(person,email.value,password.value))
         mostrarMensaje()
     }
-})
+});
+
+
 

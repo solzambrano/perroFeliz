@@ -43,9 +43,9 @@
         <!--navegacion a las diferentes secciones de la pagina-->
         <!--hacer que el recuadro no cambie de tamaño es incomodo para el usuario-->
         <section>
-            <form id="enviar" action="">
+            <form id="enviar" class="container" action="">
                 <fieldset id="pasoUno">
-                  <h3>Paso 1: Información de contacto</h2>
+                  <h3 class="">Paso 1: Información de contacto</h2>
                 <div class="form-group">
                     <label for="nombre" required >Nombre</label>
                     <input type="text" class="form-control" id="nombre">
@@ -70,7 +70,7 @@
                         <label for="barrio">Barrio</label>
                         <input class="form-control" id="barrio" name="data[address]" placeholder="Ciudad de Nieva"></input>
                         </div>       
-                    <button type="button" id="botonSig" class="separados btn btn-outline-success">Siguiente</button>
+                    <button type="button" id="botonSig" class="btn btn-outline-success d-inline-block mb-2">Siguiente</button>
                 </fieldset>
                 <fieldset id="pasoDos">
                     <h3>Paso 2: Datos de registro</h2>
@@ -86,11 +86,12 @@
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Quiero recibir notificaciones por email</label>
                     </div>
+                    <div class="separados">
+                    <button id="atras" type="button" name="previous" class="separados previous btn btn-default"><i class="fas fa-arrow-left"></i></button>
+                    <button id="enviar" type="submit" name="submit" class=" mb-2 btn btn-outline-success" value="Enviar">Enviar</button>
+                  </div>
                 </fieldset>
-                <button type="submit" name="submit" class=" mb-2 btn btn-outline-success" value="Enviar">Enviar</button>
               </form>
-              <button id="atras" type="button" name="previous" class="separados previous btn btn-default"><i class="fas fa-arrow-left"></i></button>
-            <a href="../index.html">Volver</a>
         </section>
             <!--Informacion de contacto -->
             <footer>

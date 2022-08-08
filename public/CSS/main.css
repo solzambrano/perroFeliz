@@ -56,8 +56,7 @@ h1{
 }
  .boton{ 
    color:rgb(15, 15, 15);
-   background-color: transparent;
-  border-radius: 0.3;
+   border-radius: 0.3;
   /*cambiar la forma del cursor*/
   cursor:pointer;
 }
@@ -67,6 +66,9 @@ h1{
     background-image: -ms-linear-gradient(top, #d0e76633, #dacc54);
     background-image: -o-linear-gradient(top, #d0e76633, #dacc54);
     background-image: linear-gradient(to bottom,  #d0e76633, #dacc54);
+}
+a:active{
+    background-color: rgb(83, 29, 209);
 }
 /*caja de seccion*/
 #seccionDesplegable > article{
@@ -121,13 +123,8 @@ legend{
 form{
     border:3px solid rgb(22, 22, 22);
 }
-.separado{
-margin:20px auto 20px 15px;
-
-}
-#botonSig #enviar{
-    display: inline-block;
-    margin-right: 2em;
+#botonSig{
+    margin-left: 30em;
 }
 .separados{
     width: 70%;
